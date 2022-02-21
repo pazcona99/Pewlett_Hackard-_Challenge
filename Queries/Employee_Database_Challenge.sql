@@ -56,3 +56,39 @@ ON (e.emp_no = tt.emp_no)
 WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
 	AND (de.to_date = '9999-01-01')
 ORDER BY e.emp_no, tt.title ASC;
+
+SELECT * FROM mentor_list;
+
+--  Query for employee mentor count by title
+SELECT COUNT(ml.emp_no), ml.title
+INTO mentor_titles
+FROM mentor_list as ml
+GROUP BY ml.title
+ORDER BY COUNT(ml.emp_no) DESC;
+
+---- Query for employees born in 1965-1968
+DROP TABLE mentor_list_update CASCADE;
+
+SELECT DISTINCT ON (e.emp_no) e.emp_no,
+    e.first_name,
+e.last_name,
+    e.birth_date,
+    de.from_date,
+    de.to_date,
+	tt.title
+INTO mentor_list_update
+FROM employees as e
+INNER JOIN dept_emp as de
+ON (e.emp_no = de.emp_no)
+INNER JOIN titles as tt
+ON (e.emp_no = tt.emp_no)
+WHERE (e.birth_date BETWEEN '1960-01-01' AND '1965-12-31')
+	AND (de.to_date = '9999-01-01')
+ORDER BY e.emp_no, tt.title ASC;
+
+--  Query for updated employee mentor count by title
+SELECT COUNT(mlu.emp_no), mlu.title
+-- INTO mentor_titles
+FROM mentor_list_update as mlu
+GROUP BY mlu.title
+ORDER BY COUNT(mlu.emp_no) DESC;
