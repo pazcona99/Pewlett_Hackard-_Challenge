@@ -36,3 +36,23 @@ GROUP BY ut.title
 ORDER BY COUNT(ut.emp_no) DESC;
 
 SELECT * FROM retiring_titles
+
+-- Deliverable 2: Creating a mentorship elgibility table
+
+-- Query for employees born in 1965
+SELECT DISTINCT ON (e.emp_no) e.emp_no,
+    e.first_name,
+e.last_name,
+    e.birth_date,
+    de.from_date,
+    de.to_date,
+	tt.title
+INTO mentor_list
+FROM employees as e
+INNER JOIN dept_emp as de
+ON (e.emp_no = de.emp_no)
+INNER JOIN titles as tt
+ON (e.emp_no = tt.emp_no)
+WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
+	AND (de.to_date = '9999-01-01')
+ORDER BY e.emp_no, tt.title ASC;
