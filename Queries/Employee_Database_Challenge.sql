@@ -1,18 +1,6 @@
 -- Deliverable 1: Find the Number of Retiring Employees
--- Use Dictinct with Orderby to remove duplicate rows
-SELECT DISTINCT ON (______) _____,
-______,
-______,
-______
 
--- INTO emp_retire
-FROM _______
-WHERE _______
-ORDER BY _____, _____ DESC;
-
-SELECT * FROM employees 
-SELECT * FROM titles 
-
+-- Query for employees born between 1952 and 1955
 SELECT  e.emp_no,
     e.first_name,
 e.last_name,
@@ -28,7 +16,7 @@ ORDER BY e.emp_no;
 
 SELECT * FROM emp_retire
 
--- Use the Distinct On Feature for titles
+-- Use the Distinct On Feature for unique titles of those retiring and currently employed
 SELECT DISTINCT ON (ret.emp_no) ret.emp_no,
     ret.first_name,
 ret.last_name,
