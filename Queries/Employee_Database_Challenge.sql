@@ -88,7 +88,7 @@ ORDER BY e.emp_no, tt.title ASC;
 
 --  Query for updated employee mentor count by title
 SELECT COUNT(mlu.emp_no), mlu.title
--- INTO mentor_titles
+-- INTO mentor_titles_updated
 FROM mentor_list_update as mlu
 GROUP BY mlu.title
 ORDER BY COUNT(mlu.emp_no) DESC;
