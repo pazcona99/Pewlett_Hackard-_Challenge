@@ -28,7 +28,7 @@ ORDER BY e.emp_no;
 
 SELECT * FROM emp_retire
 
--- Use the Distinct On Feature
+-- Use the Distinct On Feature for titles
 SELECT DISTINCT ON (ret.emp_no) ret.emp_no,
     ret.first_name,
 ret.last_name,
@@ -39,3 +39,12 @@ WHERE (ret.to_date = '9999-01-01')
 ORDER BY ret.emp_no, ret.title ASC;
 
 SELECT * FROM emp_retire
+
+-- Number of employees retiring by title
+SELECT COUNT(ut.emp_no), ut.title
+INTO retiring_titles
+FROM unique_titles as ut
+GROUP BY ut.title
+ORDER BY COUNT(ut.emp_no) DESC;
+
+SELECT * FROM retiring_titles
